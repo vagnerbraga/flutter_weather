@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_weather/src/models/counter_bloc.dart';
 import 'package:flutter_weather/src/pages/counter_page.dart';
 
-//void main() => runApp(MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
