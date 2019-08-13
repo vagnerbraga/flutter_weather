@@ -7,15 +7,12 @@ class ActionsControl extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: _mapStateToActionButtons(
-        timerBloc: BlocProvider.of<TimerBloc>(context),
-      ),
+      children: _mapStateToActionButtons(timerBloc: BlocProvider.of<TimerBloc>(context)),
     );
   }
 
-  List<Widget> _mapStateToActionButtons({
-    TimerBloc timerBloc,
-  }) {
+  List<Widget> _mapStateToActionButtons({TimerBloc timerBloc,}) {
+
     final TimerState state = timerBloc.currentState;
     if (state is Ready) {
       return [
@@ -31,10 +28,7 @@ class ActionsControl extends StatelessWidget {
           child: Icon(Icons.pause),
           onPressed: () => timerBloc.dispatch(Pause()),
         ),
-        FloatingActionButton(
-          child: Icon(Icons.replay),
-          onPressed: () => timerBloc.dispatch(Reset()),
-        ),
+        this._buildFabReset(timerBloc),
       ];
     }
     if (state is Paused) {
@@ -43,20 +37,20 @@ class ActionsControl extends StatelessWidget {
           child: Icon(Icons.play_arrow),
           onPressed: () => timerBloc.dispatch(Resume()),
         ),
-        FloatingActionButton(
-          child: Icon(Icons.replay),
-          onPressed: () => timerBloc.dispatch(Reset()),
-        ),
+        this._buildFabReset(timerBloc),
       ];
     }
     if (state is Finished) {
-      return [
-        FloatingActionButton(
-          child: Icon(Icons.replay),
-          onPressed: () => timerBloc.dispatch(Reset()),
-        ),
-      ];
+      return [this._buildFabReset(timerBloc),];
     }
     return [];
   }
+
+  Widget _buildFabReset(TimerBloc timerBloc){
+    return FloatingActionButton(
+      child: Icon(Icons.replay),
+      onPressed: () => timerBloc.dispatch(Reset()),
+    );
+  }
+
 }

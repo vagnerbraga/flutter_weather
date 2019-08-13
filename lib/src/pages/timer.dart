@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_weather/src/models/bloc.dart';
 import 'package:flutter_weather/src/pages/background.dart';
 import 'package:flutter_weather/src/pages/actions.dart';
+import 'package:flutter_weather/src/pages/page01.dart';
 
 class Timer extends StatelessWidget {
   static const TextStyle timerTextStyle = TextStyle(
@@ -13,7 +14,8 @@ class Timer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Flutter Timer')),
+      appBar: AppBar(title: Text('Flutter Timer timer')),
+      //drawer: _buildDrawwer(context),
       body: Stack(
         children: [
           Background(),
@@ -47,8 +49,47 @@ class Timer extends StatelessWidget {
                 currentState.runtimeType != previousState.runtimeType,
                 builder: (context, state) => ActionsControl(),
               ),
+              Row( children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(left: 20.0),
+                  child: FloatingActionButton(
+                    child: Icon(Icons.play_arrow),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 20.0),
+                  child: FloatingActionButton(
+                    child: Icon(Icons.playlist_add),
+                  ),
+                )
+                ],
+
+              )
+
+
             ],
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDrawwer(BuildContext context){
+    return Drawer(
+      child: Column(
+        children: <Widget>[
+          AppBar(
+            title: Text("titulo"),
+            automaticallyImplyLeading: false,
+          ),
+          ListTile(
+            title: Text("Counter Page 01"),
+            onTap: (){
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (BuildContext context) => Page01()));
+            },
+          )
         ],
       ),
     );

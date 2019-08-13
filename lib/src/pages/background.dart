@@ -30,7 +30,7 @@ class Background extends StatelessWidget {
         gradientEnd: Alignment.topCenter,
       ),
       size: Size(double.infinity, double.infinity),
-      waveAmplitude: 25,
+      waveAmplitude: 45,
       backgroundColor: Colors.blue[50],
     );
   }
